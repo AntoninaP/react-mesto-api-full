@@ -99,13 +99,16 @@ class Api {
     })
       .then(this._checkResponse)
   }
+
+
+
 }
 
-
 const newApi = new Api({
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-20/',
+
+  baseUrl: 'http://localhost:3001/',
   headers: {
-    authorization: 'b9b88552-735f-4768-bf07-4ff3fcde19d4',
+    authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
   }
 })

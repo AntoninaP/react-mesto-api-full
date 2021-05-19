@@ -19,7 +19,7 @@ const getUsers = async (req, res, next) => {
 
 const getCurrentUser = async (req, res, next) => {
   try {
-    const currentUser = await User.find({ _id: req.user._id })
+    const currentUser = await User.findOne({ _id: req.user._id })
       .orFail(new NotFoundError('Объект не найден'));
     res.status(200).send(currentUser);
   } catch (err) {

@@ -50,7 +50,7 @@ function App() {
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    const isLiked = card.likes.some(i => i === currentUser._id);
     // Отправляем запрос в API и получаем обновлённые данные карточки
     newApi.changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -131,6 +131,7 @@ function App() {
   function handleAddPlaceSubmit(picture) {
     newApi.addNewCard(picture.name, picture.link)
       .then((newCard) => {
+        console.log(newCard)
         setCards([newCard, ...cards]);
       })
       .catch((err) => {
@@ -159,7 +160,6 @@ function App() {
 
   //методы для регистрации, авторизации
   function handleRegistration({email, password}) {
-    console.log({email, password})
     Auth.registration({email, password})
       .then(() => {
         setRegisterStatus(true)
@@ -175,7 +175,7 @@ function App() {
   function handleAuthorization({email, password}) {
     Auth.authorization({email, password})
       .then((data) => {
-        console.log(data)
+        console.log(data.token)
         localStorage.setItem('jwt', data.token);
         setLoggedIn(true);
         history.push('/');

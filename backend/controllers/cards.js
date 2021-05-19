@@ -5,7 +5,7 @@ const BadRequestError = require('../errors/bad-request-error');
 
 const getCards = async (req, res, next) => {
   try {
-    const allCards = await Card.find({});
+    const allCards = await Card.find({}).sort({ createAt: -1 });
     res.status(200).send(allCards);
   } catch (err) {
     next(err);
@@ -35,7 +35,7 @@ const createCard = async (req, res, next) => {
     const card = new Card({ name, link, likes: [] });
     card.owner = new mongoose.Types.ObjectId(req.user._id);
     await card.save();
-    res.send({ data: card });
+    res.send(card);
   } catch (err) {
     if (err.name === 'ValidationError') {
       next(new BadRequestError('Переданы некорректные данные'));
