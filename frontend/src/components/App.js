@@ -22,7 +22,7 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [selectedCard, setCard] = React.useState(null);
-  const [currentUser, setCurrentUser] = React.useState({name: '', about: '', avatar: ''});
+  const [currentUser, setCurrentUser] = React.useState({name: '', about: '', avatar: '', email: ''});
   const [cards, setCards] = React.useState([]);
 
   //константы для регистрации, авторизации
@@ -74,6 +74,7 @@ function App() {
   React.useEffect(() => {
     newApi.getInitialCards()
       .then((data) => {
+        console.log(data)
         setCards(data)
       })
       .catch((err) => {
@@ -84,6 +85,7 @@ function App() {
   React.useEffect(() => {
     newApi.getProfileInfo()
       .then((data) => {
+        console.log(data)
         setCurrentUser(data);
       })
       .catch((err) => {
@@ -175,8 +177,9 @@ function App() {
   function handleAuthorization({email, password}) {
     Auth.authorization({email, password})
       .then((data) => {
-        console.log(data.token)
+        console.log(data)
         localStorage.setItem('jwt', data.token);
+        newApi.setToken();
         setLoggedIn(true);
         history.push('/');
       })
@@ -189,8 +192,10 @@ function App() {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
       Auth.getContent(jwt)
-        .then(({email, password}) => {
-          if (email) {
+        .then((data) => {
+          console.log(data)
+          if (data.email) {
+            setCurrentUser(data)
             setLoggedIn(true);
           }
         })
@@ -216,7 +221,7 @@ function App() {
         <div className="page">
           <Header currentPath={pathname}
                   onLogOut={handleLogOut}
-                  email={data.email}
+                  email={currentUser.email}
           />
           <Switch>
             <ProtectedRoute
