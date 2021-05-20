@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:3000';
+export const BASE_URL = 'http://antonina-mesto-front.nomoredomains.icu';
 
 export const registration = ({email, password}) => {
   return fetch(`${BASE_URL}/signup`, {
