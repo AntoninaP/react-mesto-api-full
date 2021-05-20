@@ -99,9 +99,6 @@ class Api {
     })
       .then(this._checkResponse)
   }
-
-
-
 }
 
 const newApi = new Api({
