@@ -108,7 +108,7 @@ class Api {
 
 const newApi = new Api({
 
-  baseUrl: 'http://antonina-mesto-front.nomoredomains.icu/',
+  baseUrl: 'https://antonina-mesto-front.nomoredomains.icu/',
   headers: {
     authorization: `Bearer ${localStorage.getItem('jwt')}`,
     'Content-Type': 'application/json'
