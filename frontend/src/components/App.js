@@ -45,8 +45,8 @@ function App() {
   }, [history, loggedIn])
 
   React.useEffect(() => {
-    tokenCheck()
-  }, [])
+        tokenCheck();
+  }, [history, loggedIn])
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -74,24 +74,22 @@ function App() {
   React.useEffect(() => {
     newApi.getInitialCards()
       .then((data) => {
-        console.log(data)
         setCards(data)
       })
       .catch((err) => {
         console.log('error', err)
       })
-  }, [])
+  }, [history, loggedIn])
 
   React.useEffect(() => {
     newApi.getProfileInfo()
       .then((data) => {
-        console.log(data)
         setCurrentUser(data);
       })
       .catch((err) => {
         console.log('error', err)
       })
-  }, []);
+  }, [history, loggedIn]);
 
 
   function handleEditAvatarClick() {
@@ -133,7 +131,6 @@ function App() {
   function handleAddPlaceSubmit(picture) {
     newApi.addNewCard(picture.name, picture.link)
       .then((newCard) => {
-        console.log(newCard)
         setCards([newCard, ...cards]);
       })
       .catch((err) => {
@@ -177,7 +174,6 @@ function App() {
   function handleAuthorization({email, password}) {
     Auth.authorization({email, password})
       .then((data) => {
-        console.log(data)
         localStorage.setItem('jwt', data.token);
         newApi.setToken();
         setLoggedIn(true);
@@ -192,10 +188,8 @@ function App() {
     if (localStorage.getItem('jwt')) {
       let jwt = localStorage.getItem('jwt');
       Auth.getContent(jwt)
-        .then((data) => {
-          console.log(data)
-          if (data.email) {
-            setCurrentUser(data)
+        .then(({email}) => {
+          if (email) {
             setLoggedIn(true);
           }
         })

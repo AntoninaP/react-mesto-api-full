@@ -13,7 +13,6 @@ function Login(props) {
   function handleSubmit(e) {
     const {email, password} = props.data;
     e.preventDefault();
-    console.log(props.data);
     props.onAutorization({email, password})
   }
 

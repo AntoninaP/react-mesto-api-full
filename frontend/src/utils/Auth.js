@@ -11,7 +11,6 @@ export const registration = ({email, password}) => {
 }
 
 export const authorization = ({email, password}) => {
-  console.log(email, password)
   return fetch(`${BASE_URL}/signin`, {
     method: 'POST',
     headers: {'Accept': 'application/json',
