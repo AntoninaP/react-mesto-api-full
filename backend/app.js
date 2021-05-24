@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const helmet = require('helmet');
@@ -13,7 +14,7 @@ const { PORT = 3001 } = process.env;
 const app = express();
 const auth = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-require('dotenv').config();
+
 
 mongoose.connect('mongodb://localhost:27017/mestodb', {
   useNewUrlParser: true,
