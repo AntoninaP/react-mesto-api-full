@@ -1,6 +1,7 @@
 # Logs
 logs
-*.log
+backend/error.log
+backend/request.log
 npm-debug.log*
 
 # Dependency directory
@@ -15,3 +16,4 @@ frontend/node_modules
 .idea
 backend/.env
 
+frontend/build

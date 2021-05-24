@@ -32,7 +32,7 @@ const checkURL = (val, helper) => {
 
 userRoutes.patch('/me/avatar', celebrate({
   body: Joi.object().keys({
-    avatar: Joi.string().custom(checkURL, 'invalid URL'),
+    avatar: Joi.string().custom(checkURL, 'invalid URL').required(),
   }),
 }), updateAvatar);
 

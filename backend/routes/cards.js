@@ -34,14 +34,14 @@ cardRoutes.post('/', celebrate({
 }), createCard);
 
 // поставить лайк карточке
-cardRoutes.put('/likes/:cardId', celebrate({
+cardRoutes.put('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }).unknown(true),
 }), likeCard);
 
 // убрать лайк с карточки
-cardRoutes.delete('/likes/:cardId', celebrate({
+cardRoutes.delete('/:cardId/likes', celebrate({
   params: Joi.object().keys({
     cardId: Joi.string().hex().length(24),
   }).unknown(true),

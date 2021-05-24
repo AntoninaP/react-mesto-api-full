@@ -5,6 +5,7 @@ const NotFoundError = require('../errors/not-found-error');
 const BadRequestError = require('../errors/bad-request-error');
 const AuthError = require('../errors/auth-error');
 const EmailIsExistError = require('../errors/email-is-exist-error');
+
 const { NODE_ENV, JWT_SECRET } = process.env;
 const opt = { new: true, runValidators: true };
 
@@ -117,7 +118,7 @@ const login = async (req, res, next) => {
     // создадим токен
     const token = jwt.sign(
       { _id: user._id },
-      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret'
+      NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
     );
     // вернём токен
     res.send({ token });

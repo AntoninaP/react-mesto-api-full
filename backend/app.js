@@ -4,10 +4,11 @@ const helmet = require('helmet');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const { isURL } = require('validator');
+const cors = require('cors');
 const { routes } = require('./routes/index');
 const { login, createUser } = require('./controllers/users');
 const NotFoundError = require('./errors/not-found-error');
-const cors = require('cors');
+
 const { PORT = 3001 } = process.env;
 const app = express();
 const auth = require('./middlewares/auth');
