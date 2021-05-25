@@ -116,7 +116,6 @@ const login = async (req, res, next) => {
     }
     // совпали - аутентификация успешна
     // создадим токен
-    console.log(NODE_ENV, JWT_SECRET);
     const token = jwt.sign(
       { _id: user._id },
       NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
